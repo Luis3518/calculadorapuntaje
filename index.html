@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Calculadora de puntaje</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="estilo.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+
+<div class="jumbotron">
+    <h1 class="display-5">Calculadora de puntaje</h1>
+    <p class="lead">Sistema que permite calcular el puntaje que otorga un curso para docentes de CABA.</p>
+    <p class="lead">Esta calculadora se hizo teniendo en cuenta la pagina 32 del <a href="https://www.buenosaires.gob.ar/educacion/docentes/estatuto-del-docente"target="_blank" class="alert-link">estatuto docente</a> y el <a href="https://informaciondocentecaba.blogspot.com/2020/06/cuadro-valoracion-de-puntaje-de-cursos.html"target="_blank" class="alert-link">cuadro</a> que hizo Virginia.</p>
+    <hr class="my-4">
+    <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping">Cantidad horas catedra:</span>
+            <input type="text" id="hscat" class="form-control" placeholder="" aria-label="Hs" aria-describedby="addon-wrapping">
+        </div>
+    </div>
+    <br />
+    <input type="checkbox" id="c1" name="cc" />
+    <label for="c1">El curso fue hecho en Escuela de maestros</label>
+    <br />
+    <input type="checkbox" id="c2" name="cc" />
+    <label for="c2"><span></span>El curso encuadra dentro de las LAP</label>
+    <br />
+    <input type="checkbox" id="c3" name="cc" />
+    <label for="c3"><span></span>El curso es en modalidad virtual</label>
+    <br />
+    <input type="checkbox" id="c4" name="cc" />
+    <label for="c4"><span></span>El curso es espeifico</label>
+    <br />
+    <a class="btn btn-secondary btn-lg" id="doIt" role="button">Calcular</a>
+    <hr class="my-4">
+    <br />
+    <div class="alert alert-dark" role="alert">
+        <p class="h2" id="mensaje"></p>    
+    </div>
+    <p class="lead">Si encontras un error o se te ocurre algo para agregar, mandame un mensaje.</p>
+</div>
+<script>
+$("#doIt").on("click", function () {
+    var check = $('input:checked:checkbox[name=cc]');
+    var id = '';
+    $.each($(check), function (index) {
+        id += $(this).attr('id');
+    });
+    if ($(check).is(':checked')) {
+        switch (id) {
+            case 'c1':
+            puntaje = 0.003;
+                break;
+            case 'c2':
+            puntaje = 0.005;
+                break;
+            case 'c3':
+            puntaje = 0.00275;
+                break;
+            case 'c4':
+            puntaje = 0.005;
+                break;
+            case 'c1c2':
+            puntaje = 0.006;
+                break;
+            case 'c1c3':
+            puntaje = 0.0045;
+                break;
+            case 'c1c4':
+            puntaje = 0.006;
+                break;
+            case 'c2c3':
+            puntaje = 0.0055;
+                break;
+            case 'c2c4':
+            puntaje = 0.01;
+                break;
+            case 'c3c4':
+            puntaje = 0.0055;
+                break;
+            case 'c1c2c3':
+            puntaje = 0.009;
+                break;
+            case 'c1c2c4':
+            puntaje = 0.012;
+            case 'c1c3c4':
+            puntaje = 0.009;
+                break;
+            case 'c2c3c4':
+            puntaje = 0.011;
+                break;
+            case 'c1c2c3c4':
+            puntaje = 0.018;
+                break;
+        }
+    } else {
+        puntaje = 0.0025;
+    }
+var total;
+var puntaje;
+var hscat = document.getElementById('hscat').value;
+t = hscat * puntaje;
+total = t.toString();
+mensaje = "El curso da " + total + " puntos";
+document.getElementById("mensaje").innerHTML = mensaje;
+});
+</script>
+<footer>
+    <div>
+        <p>Programado por: <em>Luis Rodriguez</em></p>
+        <a title="Github" href="https://github.com/Luis3518"» target=»_blank»><img src="multimedia\github.png" alt="Github" /></a>
+        <a title="Instagram" href="https://www.instagram.com/luis.rodriguez3518/"» target=»_blank»><img src="multimedia\instagram.png" alt="Instagram" /></a>
+        <a title="Linkedin" href="https://www.linkedin.com/in/luis-rodriguez3518/"» target=»_blank»><img src="multimedia\linkedin.png" alt="Linkedin" /></a>
+        <a title="Mail" href="mailto:luis.rodriguez@bue.edu.ar"» target=»_blank»><img src="multimedia\mail.png" alt="Mail" /></a>
+        <a title="Reddit" href="https://reddit.com/u/LuisRodriguez3518"» target=»_blank»><img src="multimedia\reddit.png" alt="Reddit" /></a>
+        <a title="Skype" href="https://join.skype.com/invite/zfyTMWg0wG65"» target=»_blank»><img src="multimedia\skype.png" alt="Skype" /></a>
+        <a title="Twitter" href="https://twitter.com/Rodriguez_LuisM"» target=»_blank»><img src="multimedia\twitter.png" alt="Twitter" /></a>
+        <a title="Wordpress" href="https://profeluisrodriguez.wordpress.com/"» target=»_blank»><img src="multimedia\wordpress.png" alt="Wordpress" /></a>
+        <a title="Youtube" href="https://www.youtube.com/channel/UCeUy8gpKa_umOxenhLdUIiQ/videos"» target=»_blank»><img src="multimedia\youtube.png" alt="Youtube" /></a>
+    </div>
+    </footer>
+    </body>
+    </html>
